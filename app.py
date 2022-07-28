@@ -1,4 +1,5 @@
 from flask import Flask, redirect, url_for, request, render_template
+from wsgiref.simple_server import make_server
 
 app = Flask(__name__)
 
@@ -36,4 +37,5 @@ def login():
         return redirect(url_for('success', name=user))
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    server = make_server('', 5000, app)
+    server.serve_forever()
